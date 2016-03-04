@@ -1,8 +1,3 @@
-# author      :tracyone
-# date        :2013-08-25/17:25:29
-# lastchange  :2014-02-23/01:20:00
-# ---------------------------------------------------
-
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 

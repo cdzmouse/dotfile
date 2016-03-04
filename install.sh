@@ -11,6 +11,7 @@ ln -fs `pwd`/zshrc   ~/.zshrc
 ln -fs `pwd`/gitconfig   ~/.gitconfig
 ln -fs `pwd`/gitignore_for_linux_kernel   ~/.gitignore
 
+ln -fs `pwd`/tm   /bin/tm
 
 
 

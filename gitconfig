@@ -1,0 +1,32 @@
+[user]
+	name = \"tracyone\"
+	email = \"tracyone@live.cn\"
+[credential]
+	helper = cache --timeout=86400
+[core]
+	editor = vim
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[difftool]
+	prompt = 0
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
+	mt = mergetool
+	d = difftool
+	dst = diff --staged
+	sub = submodule
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[mergetool]
+	prompt = false
+[web]
+	browser = open

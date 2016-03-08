@@ -222,6 +222,9 @@ function! Do_CsTag()
     if ( DeleteFile(dir, "tags") ) 
         return 
     endif
+    if ( DeleteFile(dir, "functions") ) 
+        return 
+    endif
     if ( DeleteFile(dir, "cscope.files") ) 
         return 
     endif
@@ -231,6 +234,7 @@ function! Do_CsTag()
 
     if(executable('ctags'))
         silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+        silent! execute "!ctags -R --c-types=f -f functions  *.c  ."
     endif
     if(executable('cscope') && has("cscope") )
         silent! execute "!find . -iname '*.[ch]' -o -name '*.cpp' > cscope.files"

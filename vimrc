@@ -2,7 +2,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " " }
 Bundle 'gmarik/vundle'
-
+"
+"   vundle 本身的安装：
+"   git clone https://github.com/VundleVim/Vundle.vim.git vim/bundle/vundle
+"
 "  " github上的用户写的插件，使用这种用户名+repo名称的方式
 "  " vimscripts的repo使用下面的格式，直接是插件名称
 "

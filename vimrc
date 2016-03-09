@@ -31,7 +31,8 @@ Bundle 'YankRing.vim'
 Bundle 'a.vim'
 Bundle 'omnicppcomplete'
 Bundle 'bufexplorer.zip'
-Bundle 'NERD_commenter.vim'
+Bundle 'The-NERD-Commenter'
+Bundle 'Mark'
 
 """"""""""""Bundle 'DoxygenToolkit.vim'
 let mapleader = ";"    " 比较习惯用;作为命令前缀，右手小拇指直接能按到
@@ -44,7 +45,7 @@ autocmd! bufwritepost *.vimrc source $HOME/.vimrc
 
 
 " ^z快速进入shell
-inoremap <leader>n <esc>
+"inoremap <leader>n <esc>
 
 set nocompatible    " 关闭兼容模式
 syntax enable       " 语法高亮
@@ -200,12 +201,6 @@ map <leader>cs ,cs
 map <leader>c$ ,c$
 map <leader>cu ,cu
 
-" NERD tree
-" http://www.vim.org/scripts/script.php?script_id=1658
-let NERDTreeShowHidden = 1
-let NERDTreeWinPos = "left"
-let NERDTreeWinSize = s:PlugWinSize 
-nmap <leader>n :NERDTreeToggle<cr>
 
 " DoxygenToolkit.vim
 " http://www.vim.org/scripts/script.php?script_id=987
@@ -375,5 +370,9 @@ let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 "defalut g:pydiction_menu_height == 10
 "let g:pydiction_menu_height = 10 
 
-
+"缓冲区捷命令
+"打开缓冲区浏览器
+map <leader>be :BufExplorer<cr>
+"关闭当前缓冲
+map <leader>bd :Bclose<cr>
 

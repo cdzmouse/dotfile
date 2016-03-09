@@ -33,8 +33,8 @@ Bundle 'omnicppcomplete'
 Bundle 'bufexplorer.zip'
 Bundle 'The-NERD-Commenter'
 Bundle 'Mark'
+Bundle 'DoxygenToolkit.vim'
 
-""""""""""""Bundle 'DoxygenToolkit.vim'
 let mapleader = ";"    " 比较习惯用;作为命令前缀，右手小拇指直接能按到
 " 把空格键映射成:
 nmap <space> :
@@ -204,7 +204,22 @@ map <leader>cu ,cu
 
 " DoxygenToolkit.vim
 " http://www.vim.org/scripts/script.php?script_id=987
-" 暂时没有使用
+let g:DoxygenToolkit_briefTag_pre="@brief  "
+let g:DoxygenToolkit_paramTag_pre="@param "
+let g:DoxygenToolkit_returnTag="@return   \<enter>* @note \<enter>\<enter>"
+let g:DoxygenToolkit_blockHeader=""
+let g:DoxygenToolkit_blockFooter=""
+let g:DoxygenToolkit_authorName="zhaoguitian"
+let g:DoxygenToolkit_licenseTag="GPL 2.0"
+
+let g:DoxygenToolkit_authorName="zhaoguitian, cdzmouse@gmail.com"
+let s:licenseTag = "Copyright(C)\<enter>"
+let s:licenseTag = s:licenseTag . "\<enter>"
+let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+let g:DoxygenToolkit_licenseTag = s:licenseTag
+let g:DoxygenToolkit_briefTag_funcName="yes"
+let g:doxygen_enhanced_color=1
+map <leader>dox :Dox
 
 " 更新ctags和cscope索引
 " href: http://www.vimer.cn/2009/10/把vim打造成一个真正的ide2.html

@@ -24,6 +24,7 @@ Bundle 'gmarik/vundle'
 " 'XXX'，使得bundle能够加载，这个插件，同时如果
 " " 需要配置这个插件，也是在vimrc中设置即可
 Bundle 'taglist.vim'
+Bundle 'genutils'
 Bundle 'winmanager'
 Bundle 'c.vim'
 Bundle 'snipMate'
@@ -37,6 +38,8 @@ Bundle 'bufexplorer.zip'
 Bundle 'The-NERD-Commenter'
 Bundle 'Mark'
 Bundle 'DoxygenToolkit.vim'
+Bundle 'https://github.com/kien/ctrlp.vim.git'
+Bundle 'ack.vim'
 
 let mapleader = ";"    " 比较习惯用;作为命令前缀，右手小拇指直接能按到
 " 把空格键映射成:
@@ -99,7 +102,7 @@ set t_Co=256
 
 set history=400  " vim记住的历史操作的数量，默认的是20
 set autoread     " 当文件在外部被修改时，自动重新读取
-set mouse=n     " 在所有模式下都允许使用鼠标，还可以是n,v,i,c等
+set mouse=     " 在所有模式下都允许使用鼠标，还可以是n,v,i,c等
 
 set encoding=utf8
 set fileencodings=utf8,gb2312,gb18030,ucs-bom,latin1
@@ -393,4 +396,37 @@ let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 map <leader>be :BufExplorer<cr>
 "关闭当前缓冲
 map <leader>bd :Bclose<cr>
+map <leader>ex :Explore<cr>
+map <leader>tl :Tlist<cr>
+
+
+
+"cscope 快捷键配置
+"nmap <C-x>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-x>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-x>c  :cs find c <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-x>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-x>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-x>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+"nmap <C-x>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+"nmap <C-x>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+"""""""""""""""""""""""""""""" 
+" lookupfile setting
+"""""""""""""""""""""""""""""" 
+"let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
+"let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
+"let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
+"let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
+"let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
+"if filereadable("./filenametags")                "设置tag文件的名字
+"  let g:LookupFile_TagExpr = '"./filenametags"'
+"endif
+""映射LookupFile为,lk
+"nmap <silent> <leader>lk :LUTags<cr>
+"映射LUBufs为,ll
+"nmap <silent> <leader>ll :LUBufs<cr>
+"映射LUWalk为,lw
+"nmap <silent> <leader>lw :LUWalk<cr>
+
 

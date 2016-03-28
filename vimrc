@@ -41,9 +41,9 @@ Bundle 'ack.vim'
 Bundle 'UltiSnips'
 Bundle 'honza/vim-snippets'
 Bundle 'https://github.com/sheerun/vim-polyglot.git'
-Bundle 'syntastic'
+"Bundle 'syntastic'
 Bundle 'solarized'
-"Bundle 'The-NERD-tree'
+Bundle 'The-NERD-tree'
 Bundle 'nathanaelkane/vim-indent-guides'
 
 
@@ -482,15 +482,15 @@ nmap <C-x>c  :cs find c <C-R>=expand("<cword>")<CR><CR>
 
 
 "syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-noremap <leader>ll :lclose<CR>
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 1
+"noremap <leader>ll :lclose<CR>
 
 
 " Strip trailing whitespace (,ss)

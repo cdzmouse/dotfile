@@ -1,6 +1,8 @@
 #下载vim的vundl插件，用于管理vim的其它插件
 #git clone https://github.com/VundleVim/Vundle.vim.git vim/bundle/vundl
 
+tar xvf vim_plugin.tgz
+
 ##安装vim配置
 ln -fs `pwd`/vim    ~/.vim
 ln -fs `pwd`/vimrc   ~/.vimrc

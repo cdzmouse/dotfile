@@ -63,3 +63,4 @@ export LCLIMPORTDIR=usr/local/share/splint/import
 
 
 
+cd /home/atz

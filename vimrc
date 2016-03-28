@@ -27,10 +27,8 @@ Bundle 'taglist.vim'
 Bundle 'genutils'
 Bundle 'winmanager'
 Bundle 'c.vim'
-Bundle 'snipMate'
 Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'Pydiction'
-Bundle 'SnippetComplete'
 Bundle 'YankRing.vim'
 Bundle 'a.vim'
 Bundle 'omnicppcomplete'
@@ -40,6 +38,16 @@ Bundle 'Mark'
 Bundle 'DoxygenToolkit.vim'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'ack.vim'
+Bundle 'UltiSnips'
+Bundle 'honza/vim-snippets'
+Bundle 'https://github.com/sheerun/vim-polyglot.git'
+Bundle 'syntastic'
+Bundle 'solarized'
+"Bundle 'The-NERD-tree'
+Bundle 'nathanaelkane/vim-indent-guides'
+
+
+
 
 let mapleader = ";"    " 比较习惯用;作为命令前缀，右手小拇指直接能按到
 " 把空格键映射成:
@@ -53,6 +61,52 @@ autocmd! bufwritepost *.vimrc source $HOME/.vimrc
 " ^z快速进入shell
 "inoremap <leader>n <esc>
 
+" Use the Solarized Dark theme
+set background=dark
+"colorscheme molokai 
+"let g:solarized_termtrans=1
+
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+" Enhance command-line completion
+set wildmenu
+" Allow cursor keys in insert mode
+set esckeys
+" Optimize for fast terminal connections
+set ttyfast
+" Add the g flag to search/replace by default
+set gdefault
+" Don’t add empty newlines at the end of files
+set binary
+" Centralize backups, swapfiles and undo history
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+if exists("&undodir")
+    set undodir=~/.vim/undo
+endif
+
+" Don’t create backups when editing files in certain directories
+set backupskip=/tmp/*,/private/tmp/*
+
+" Respect modeline in files
+set modeline
+set modelines=4
+" Enable per-directory .vimrc files and disable unsafe commands in them
+set exrc
+set secure
+" Always show status line
+set laststatus=2
+" Disable error bells
+set noerrorbells
+" Don’t reset cursor to start of line when moving around.
+set nostartofline
+" Show the filename in the window titlebar
+set title
+set showcmd
+" Start scrolling three lines before the horizontal window border
+set scrolloff=5
+
+
 set nocompatible    " 关闭兼容模式
 syntax enable       " 语法高亮
 filetype on
@@ -62,11 +116,10 @@ filetype plugin indent on
 set shortmess=atI   " 去掉欢迎界面
 set autoindent
 autocmd BufEnter * :syntax sync fromstart
-set nu              " 显示行号
+set number              " 显示行号
 set showcmd         " 显示命令
 set lz              " 当运行宏时，在命令执行完成之前，不重绘屏幕
 set hid             " 可以在没有保存的情况下切换buffer
-set backspace=eol,start,indent 
 set whichwrap+=<,>,h,l " 退格键和方向键可以换行
 set incsearch       " 增量式搜索
 set nohlsearch
@@ -81,11 +134,10 @@ set lbr             " 在breakat字符处而不是最后一个字符处断行
 set ai              " 自动缩进
 set si              " 智能缩进
 set cindent         " C/C++风格缩进
-set wildmenu         
 set nofen
 set fdl=10
-autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
-autocmd InsertEnter * se cul    " 用浅色高亮当前行  
+autocmd InsertLeave * se nocul  " 用浅色高亮当前行
+autocmd InsertEnter * se cul    " 用浅色高亮当前行
 
 " tab转化为4个字符
 set expandtab
@@ -93,7 +145,7 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" 不使用beep或flash 
+" 不使用beep或flash
 set vb t_vb=
 
 set background=dark
@@ -112,7 +164,6 @@ set fileencodings=utf8,gb2312,gb18030,ucs-bom,latin1
 set laststatus=2
 set t_Co=256
 let g:Powerline_symbols='unicode'
-set encoding=utf8
 
 " 第80列往后加下划线
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
@@ -185,11 +236,11 @@ let s:PlugWinSize = 25
 " OmniCppComplete.vim
 " http://www.vim.org/scripts/script.php?script_id=1520
 set completeopt=menu
-let OmniCpp_ShowPrototypeInAbbr = 1 
+let OmniCpp_ShowPrototypeInAbbr = 1
 let OmniCpp_DefaultNamespaces = ["std"]     " 逗号分割的字符串
-let OmniCpp_MayCompleteScope = 1 
-let OmniCpp_ShowPrototypeInAbbr = 0 
-let OmniCpp_SelectFirstItem = 2 
+let OmniCpp_MayCompleteScope = 1
+let OmniCpp_ShowPrototypeInAbbr = 0
+let OmniCpp_SelectFirstItem = 2
 " c-j自动补全，当补全菜单打开时，c-j,k上下选择
 imap <expr> <c-j>      pumvisible()?"\<C-N>":"\<C-X><C-O>"
 imap <expr> <c-k>      pumvisible()?"\<C-P>":"\<esc>"
@@ -197,7 +248,7 @@ imap <expr> <c-k>      pumvisible()?"\<C-P>":"\<esc>"
 imap <C-]>             <C-X><C-]>
 imap <C-F>             <C-X><C-F>
 imap <C-D>             <C-X><C-D>
-imap <C-L>             <C-X><C-L> 
+imap <C-L>             <C-X><C-L>
 
 " NERD_commenter.vim
 " http://www.vim.org/scripts/script.php?script_id=1218
@@ -225,7 +276,7 @@ let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
 let g:DoxygenToolkit_licenseTag = s:licenseTag
 let g:DoxygenToolkit_briefTag_funcName="yes"
 let g:doxygen_enhanced_color=1
-map <leader>dox :Dox
+map <leader>dox :Dox<cr>
 
 " 更新ctags和cscope索引
 " href: http://www.vimer.cn/2009/10/把vim打造成一个真正的ide2.html
@@ -235,17 +286,17 @@ function! Do_CsTag()
     let dir = getcwd()
 
     "先删除已有的tags和cscope文件，如果存在且无法删除，则报错。
-    if ( DeleteFile(dir, "tags") ) 
-        return 
+    if ( DeleteFile(dir, "tags") )
+        return
     endif
-    if ( DeleteFile(dir, "functions") ) 
-        return 
+    if ( DeleteFile(dir, "functions") )
+        return
     endif
-    if ( DeleteFile(dir, "cscope.files") ) 
-        return 
+    if ( DeleteFile(dir, "cscope.files") )
+        return
     endif
-    if ( DeleteFile(dir, "cscope.out") ) 
-        return 
+    if ( DeleteFile(dir, "cscope.out") )
+        return
     endif
 
     if(executable('ctags'))
@@ -288,39 +339,39 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.py exec ":call Set_Title()" 
-""定义函数SetTitle，自动插入文件头 
-function! Set_Title() 
-	"如果文件类型为.sh文件 
-	if &filetype == 'sh' 
-		call setline(1,"\#########################################################################") 
-		call append(line("."), "\# File Name: ".expand("%")) 
-		call append(line(".")+1, "\# Author: zgt") 
-		call append(line(".")+2, "\# mail: zhaoguitian@galaxywind.com") 
-		call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
-		call append(line(".")+4, "\#########################################################################") 
-		call append(line(".")+5, "\#!/bin/bash") 
-		call append(line(".")+6, "") 
+"新建.c,.h,.sh,.java文件，自动插入文件头
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.py exec ":call Set_Title()"
+""定义函数SetTitle，自动插入文件头
+function! Set_Title()
+	"如果文件类型为.sh文件
+	if &filetype == 'sh'
+		call setline(1,"\#########################################################################")
+		call append(line("."), "\# File Name: ".expand("%"))
+		call append(line(".")+1, "\# Author: zgt")
+		call append(line(".")+2, "\# mail: zhaoguitian@galaxywind.com")
+		call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+		call append(line(".")+4, "\#########################################################################")
+		call append(line(".")+5, "\#!/bin/bash")
+		call append(line(".")+6, "")
 	elseif &filetype == 'python'
 		call setline(1,"#!/usr/bin/python2.7")
         call setline(2,"#coding:utf-8")
         call setline(3,"\"\"\"")
-		call setline(4, "	 File Name: ".expand("%")) 
-		call setline(5, "	 Author: zgt") 
-		call setline(6, "	 Mail: zhaoguitian@galaxywind.com ") 
-		call setline(7, "	 Created Time: ".strftime("%c")) 
-		call setline(8, "     note: ") 
-		call setline(9, "\"\"\"") 
+		call setline(4, "	 File Name: ".expand("%"))
+		call setline(5, "	 Author: zgt")
+		call setline(6, "	 Mail: zhaoguitian@galaxywind.com ")
+		call setline(7, "	 Created Time: ".strftime("%c"))
+		call setline(8, "     note: ")
+		call setline(9, "\"\"\"")
 		call setline(10, "import os,sys,io")
 		call setline(11, "")
-	else	
-		call setline(1, "/*************************************************************************") 
-		call append(line("."), "	> File Name: ".expand("%")) 
-		call append(line(".")+1, "	> Author: zgt") 
-		call append(line(".")+2, "	> Mail: zhaoguitian@galaxywind.com ") 
-		call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
-		call append(line(".")+4, " ************************************************************************/") 
+	else
+		call setline(1, "/*************************************************************************")
+		call append(line("."), "	> File Name: ".expand("%"))
+		call append(line(".")+1, "	> Author: zgt")
+		call append(line(".")+2, "	> Mail: zhaoguitian@galaxywind.com ")
+		call append(line(".")+3, "	> Created Time: ".strftime("%c"))
+		call append(line(".")+4, " ************************************************************************/")
 		call append(line(".")+5, "")
 	endif
 	if &filetype == 'cpp'
@@ -335,7 +386,7 @@ function! Set_Title()
 	endif
 	"新建文件后，自动定位到文件末尾
 	autocmd BufNewFile * normal G
-endfunc 
+endfunc
 
 
 " 映射全选+复制 ctrl+a
@@ -344,14 +395,14 @@ map! <C-A> <Esc>ggVGY
 map <F12> gg=G
 " 选中状态下 Ctrl+c 复制
 vmap <C-c> "+y
-"去空行  
-nnoremap <F2> :g/^\s*$/d<CR> 
-"比较文件  
-nnoremap <C-F2> :vert diffsplit 
-"列出当前目录文件  
-map <F3> :tabnew .<CR>  
-"打开树状文件目录  
-map <C-F3> \be  
+"去空行
+nnoremap <F2> :g/^\s*$/d<CR>
+"比较文件
+nnoremap <C-F2> :vert diffsplit
+"列出当前目录文件
+map <F3> :tabnew .<CR>
+"打开树状文件目录
+map <C-F3> \be
 "C，C++ 按F5编译运行
 map <C-F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
@@ -362,8 +413,8 @@ func! CompileRunGcc()
 	elseif &filetype == 'cpp'
 		exec "!g++ % -o %<"
 		exec "! ./%<"
-	elseif &filetype == 'java' 
-		exec "!javac %" 
+	elseif &filetype == 'java'
+		exec "!javac %"
 		exec "!java %<"
 	elseif &filetype == 'sh'
 		:!./%:q
@@ -382,14 +433,14 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-                                                   
-                                                   
+
+
 "pydiction 1.2 python auto complete
 filetype plugin on
 let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
 " 映射全选+复制 ctrl+a
 "defalut g:pydiction_menu_height == 10
-"let g:pydiction_menu_height = 10 
+"let g:pydiction_menu_height = 10
 
 "缓冲区捷命令
 "打开缓冲区浏览器
@@ -411,9 +462,9 @@ nmap <C-x>c  :cs find c <C-R>=expand("<cword>")<CR><CR>
 "nmap <C-x>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
 "nmap <C-x>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-"""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""
 " lookupfile setting
-"""""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""""
 "let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
 "let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
 "let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
@@ -429,4 +480,46 @@ nmap <C-x>c  :cs find c <C-R>=expand("<cword>")<CR><CR>
 "映射LUWalk为,lw
 "nmap <silent> <leader>lw :LUWalk<cr>
 
+
+"syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+noremap <leader>ll :lclose<CR>
+
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+	let save_cursor = getpos(".")
+	let old_query = getreg('/')
+	:%s/\s\+$//e
+	call setpos('.', save_cursor)
+	call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
+" Save a file as root (,W)
+noremap <leader>W :w !sudo tee % > /dev/null<CR>
+
+
+
+" ultisnips setting
+autocmd FileType * call UltiSnips#FileTypeChanged()
+let g:UltiSnipsSnippetDirectories=['bundle/vim-snippets/UltiSnips/']
+let g:UltiSnipsExpandTrigger = '<Tab>'
+let g:UltiSnipsListSnippets = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-j>'
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+let g:indent_guides_enable_on_vim_startup = 0  " 默认关闭
+let g:indent_guides_guide_size            = 1  " 指定对齐线的尺寸
+let g:indent_guides_start_level       = 2  " 从第二层开始可视化显示缩进 ig 打开/关闭 vim-indent-guides
+        
 

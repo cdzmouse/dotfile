@@ -23,11 +23,9 @@ Bundle 'gmarik/vundle'
 " " 安装完之后，在vimrc中，添加Bundle
 " 'XXX'，使得bundle能够加载，这个插件，同时如果
 " " 需要配置这个插件，也是在vimrc中设置即可
-Bundle 'taglist.vim'
 Bundle 'genutils'
 Bundle 'winmanager'
 Bundle 'c.vim'
-Bundle 'https://github.com/Lokaltog/vim-powerline.git'
 Bundle 'Pydiction'
 Bundle 'YankRing.vim'
 Bundle 'a.vim'
@@ -42,10 +40,15 @@ Bundle 'UltiSnips'
 Bundle 'honza/vim-snippets'
 Bundle 'https://github.com/sheerun/vim-polyglot.git'
 "Bundle 'syntastic'
-Bundle 'solarized'
 Bundle 'The-NERD-tree'
 Bundle 'nathanaelkane/vim-indent-guides'
-
+Bundle 'vim-airline'
+Bundle 'https://github.com/easymotion/vim-easymotion.git'
+Bundle 'Tagbar'
+Bundle 'kshenoy/vim-signature'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'junegunn/vim-easy-align'
+Bundle 'molokai'
 
 
 
@@ -57,14 +60,21 @@ nmap <space> :
 map <silent> <leader>ee :e $HOME/.vimrc<cr>
 autocmd! bufwritepost *.vimrc source $HOME/.vimrc
 
-
-" ^z快速进入shell
-"inoremap <leader>n <esc>
-
 " Use the Solarized Dark theme
 set background=dark
-"colorscheme molokai 
-"let g:solarized_termtrans=1
+colorscheme molokai
+let g:zenburn_high_Contrast = 1
+let g:liquidcarbon_high_contrast = 1
+let g:molokai_original = 1
+
+let g:airline_left_sep='['
+let g:airline_right_sep=']'
+let g:airline_linecolumn_prefix = '§'
+let g:airline_paste_symbol = 'Þ'
+let g:airline_readonly_symbol = 'Ʀ'
+let g:airline_theme='molokai'
+let g:airline_enable_branch=0
+let g:airline_enable_syntastic=0
 
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
@@ -94,8 +104,6 @@ set modelines=4
 " Enable per-directory .vimrc files and disable unsafe commands in them
 set exrc
 set secure
-" Always show status line
-set laststatus=2
 " Disable error bells
 set noerrorbells
 " Don’t reset cursor to start of line when moving around.
@@ -105,7 +113,6 @@ set title
 set showcmd
 " Start scrolling three lines before the horizontal window border
 set scrolloff=5
-
 
 set nocompatible    " 关闭兼容模式
 syntax enable       " 语法高亮
@@ -148,10 +155,7 @@ set tabstop=4
 " 不使用beep或flash
 set vb t_vb=
 
-set background=dark
 set t_Co=256
-"colorscheme xoria256
-
 set history=400  " vim记住的历史操作的数量，默认的是20
 set autoread     " 当文件在外部被修改时，自动重新读取
 set mouse=     " 在所有模式下都允许使用鼠标，还可以是n,v,i,c等
@@ -159,11 +163,8 @@ set mouse=     " 在所有模式下都允许使用鼠标，还可以是n,v,i,c�
 set encoding=utf8
 set fileencodings=utf8,gb2312,gb18030,ucs-bom,latin1
 
-
 " 状态栏
 set laststatus=2
-set t_Co=256
-let g:Powerline_symbols='unicode'
 
 " 第80列往后加下划线
 "au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
@@ -192,7 +193,6 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 " 用c-j,k在buffer之间切换
 nn <C-J> :bn<cr>
 nn <C-K> :bp<cr>
-
 
 " 恢复上次文件打开位置
 set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -401,27 +401,14 @@ nnoremap <F2> :g/^\s*$/d<CR>
 nnoremap <C-F2> :vert diffsplit
 "列出当前目录文件
 map <F3> :tabnew .<CR>
-"打开树状文件目录
-map <C-F3> \be
 "C，C++ 按F5编译运行
 map <C-F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
-		exec "!g++ % -o %<"
-		exec "! ./%<"
+		exec "make"
 	elseif &filetype == 'cpp'
-		exec "!g++ % -o %<"
-		exec "! ./%<"
-	elseif &filetype == 'java'
-		exec "!javac %"
-		exec "!java %<"
-	elseif &filetype == 'sh'
-		:!./%:q
-
-	elseif &filetype == 'py'
-		exec "!python %"
-		exec "!python %<"
+		exec "make"
 	endif
 endfunc
 
@@ -448,8 +435,9 @@ map <leader>be :BufExplorer<cr>
 "关闭当前缓冲
 map <leader>bd :Bclose<cr>
 map <leader>ex :Explore<cr>
-map <leader>tl :Tlist<cr>
+map <leader>tb :Tagbar<cr>
 
+let g:tagbar_width = 30
 
 
 "cscope 快捷键配置
@@ -461,25 +449,6 @@ nmap <C-x>c  :cs find c <C-R>=expand("<cword>")<CR><CR>
 "nmap <C-x>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 "nmap <C-x>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
 "nmap <C-x>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-""""""""""""""""""""""""""""""
-" lookupfile setting
-""""""""""""""""""""""""""""""
-"let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
-"let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
-"let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
-"let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
-"let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
-"if filereadable("./filenametags")                "设置tag文件的名字
-"  let g:LookupFile_TagExpr = '"./filenametags"'
-"endif
-""映射LookupFile为,lk
-"nmap <silent> <leader>lk :LUTags<cr>
-"映射LUBufs为,ll
-"nmap <silent> <leader>ll :LUBufs<cr>
-"映射LUWalk为,lw
-"nmap <silent> <leader>lw :LUWalk<cr>
-
 
 "syntastic
 "set statusline+=%#warningmsg#
@@ -501,7 +470,7 @@ function! StripWhitespace()
 	call setpos('.', save_cursor)
 	call setreg('/', old_query)
 endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
+noremap <leader>et :call StripWhitespace()<CR>   
 " Save a file as root (,W)
 noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
@@ -521,5 +490,64 @@ let g:UltiSnipsEditSplit="vertical"
 let g:indent_guides_enable_on_vim_startup = 0  " 默认关闭
 let g:indent_guides_guide_size            = 1  " 指定对齐线的尺寸
 let g:indent_guides_start_level       = 2  " 从第二层开始可视化显示缩进 ig 打开/关闭 vim-indent-guides
-        
+
+
+
+
+" Require tpope/vim-repeat to enable dot repeat support
+" Jump to anywhere with only `s{char}{target}`
+" `s<CR>` repeat last find motion.
+nmap s <Plug>(easymotion-s)
+" Bidirectional & within line 't' motion
+omap t <Plug>(easymotion-bd-tl)
+" Use uppercase target labels and type as a lower case
+let g:EasyMotion_use_upper = 1
+ " type `l` and match `l`&`L`
+let g:EasyMotion_smartcase = 1
+" Smartsign (type `3` and match `3`&`#`)
+let g:EasyMotion_use_smartsign_us = 1
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+" 重复上一次操作, 类似repeat插件, 很强大
+map <Leader><leader>. <Plug>(easymotion-repeat)
+
+
+
+"vim-signature说明
+"m[a-zA-Z]   打标签
+"'[a-zA-Z]   跳转到标签位置
+"'.          最后一次变更的地方
+"''          跳回来的地方(最近两个位置跳转)
+"m<space>    去除所有标签
+
+"vim-multiple-cursors说明：
+"ctrl+m 选中一个
+"ctrl+p 放弃一个, 回到上一个
+"ctrl+x 跳过当前选中, 选中下一个
+"esc    退出
+"let g:multi_cursor_use_default_mapping=0
+" Default mapping
+"let g:multi_cursor_next_key='<C-m>'
+"let g:multi_cursor_prev_key='<C-m>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<Esc>'
+
+"vim-easy-align配置
+vmap <Leader>a <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+if !exists('g:easy_align_delimiters')
+    let g:easy_align_delimiters = {}
+endif
+let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove<cr>
+map <leader>tt  :tabnext<cr>
+
 

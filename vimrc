@@ -263,7 +263,7 @@ map <leader>cu <leader>cu
 " http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_briefTag_pre="@brief  "
 let g:DoxygenToolkit_paramTag_pre="@param "
-let g:DoxygenToolkit_returnTag="@return   \<enter>* @note \<enter>\<enter>"
+let g:DoxygenToolkit_returnTag="@return   \<enter>* @note "
 let g:DoxygenToolkit_blockHeader=""
 let g:DoxygenToolkit_blockFooter=""
 let g:DoxygenToolkit_authorName="zhaoguitian"

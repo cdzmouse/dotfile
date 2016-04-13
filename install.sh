@@ -3,7 +3,7 @@
 
 tar xvf vim_plugin.tgz
 
-yum install the_silver_searcher -y
+yum install ack -y
 
 
 ##安装vim配置

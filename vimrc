@@ -35,7 +35,6 @@ Bundle 'The-NERD-Commenter'
 Bundle 'Mark'
 Bundle 'DoxygenToolkit.vim'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
-Bundle 'ack.vim'
 Bundle 'UltiSnips'
 Bundle 'honza/vim-snippets'
 Bundle 'https://github.com/sheerun/vim-polyglot.git'
@@ -49,6 +48,7 @@ Bundle 'kshenoy/vim-signature'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'molokai'
+Bundle 'ag.vim'
 
 
 
@@ -62,7 +62,7 @@ autocmd! bufwritepost *.vimrc source $HOME/.vimrc
 
 " Use the Solarized Dark theme
 set background=dark
-colorscheme molokai
+"colorscheme molokai
 let g:zenburn_high_Contrast = 1
 let g:liquidcarbon_high_contrast = 1
 let g:molokai_original = 1
@@ -253,10 +253,10 @@ imap <C-L>             <C-X><C-L>
 " NERD_commenter.vim
 " http://www.vim.org/scripts/script.php?script_id=1218
 " Toggle单行注释/“性感”注释/注释到行尾/取消注释
-map <leader>cc ,c<space>
-map <leader>cs ,cs
-map <leader>c$ ,c$
-map <leader>cu ,cu
+map <leader>cc <leader>c<space>
+map <leader>cs <leader>cs
+map <leader>c$ <leader>c$
+map <leader>cu <leader>cu
 
 
 " DoxygenToolkit.vim
@@ -550,4 +550,6 @@ map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove<cr>
 map <leader>tt  :tabnext<cr>
 
+"调用ag功能查找目录下的文件中的当前光标所在的单词
+nnoremap <leader>sw :Ag <cword><cr>
 

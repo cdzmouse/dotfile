@@ -3,6 +3,9 @@
 
 tar xvf vim_plugin.tgz
 
+yum install the_silver_searcher -y
+
+
 ##安装vim配置
 ln -fs `pwd`/vim    ~/.vim
 ln -fs `pwd`/vimrc   ~/.vimrc

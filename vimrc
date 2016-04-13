@@ -48,7 +48,7 @@ Bundle 'kshenoy/vim-signature'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'molokai'
-Bundle 'ag.vim'
+Bundle 'mileszs/ack.vim'
 
 
 
@@ -551,5 +551,5 @@ map <leader>tm :tabmove<cr>
 map <leader>tt  :tabnext<cr>
 
 "调用ag功能查找目录下的文件中的当前光标所在的单词
-nnoremap <leader>sw :Ag <cword><cr>
+nnoremap <leader>sw :Ack <cword><cr>
 

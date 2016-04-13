@@ -35,7 +35,7 @@ Bundle 'The-NERD-Commenter'
 Bundle 'Mark'
 Bundle 'DoxygenToolkit.vim'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
-Bundle 'UltiSnips'
+"Bundle 'UltiSnips'
 Bundle 'honza/vim-snippets'
 Bundle 'https://github.com/sheerun/vim-polyglot.git'
 "Bundle 'syntastic'
@@ -477,14 +477,14 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
 
 " ultisnips setting
-autocmd FileType * call UltiSnips#FileTypeChanged()
-let g:UltiSnipsSnippetDirectories=['bundle/vim-snippets/UltiSnips/']
-let g:UltiSnipsExpandTrigger = '<Tab>'
-let g:UltiSnipsListSnippets = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-j>'
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+"autocmd FileType * call UltiSnips#FileTypeChanged()
+"let g:UltiSnipsSnippetDirectories=['bundle/vim-snippets/UltiSnips/']
+"let g:UltiSnipsExpandTrigger = '<Tab>'
+"let g:UltiSnipsListSnippets = '<C-j>'
+"let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+"let g:UltiSnipsJumpBackwardTrigger = '<S-j>'
+"" If you want :UltiSnipsEdit to split your window.
+"let g:UltiSnipsEditSplit="vertical"
 
 
 let g:indent_guides_enable_on_vim_startup = 0  " 默认关闭

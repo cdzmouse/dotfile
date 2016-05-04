@@ -1,6 +1,36 @@
+if has("win32")
+
+set nocompatible
+set encoding=utf8
+
+"解决菜单乱码
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+"解决consle输出乱码
+language messages zh_CN.utf-8
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+"防止特殊符号无法正常显示
+set ambiwidth=double
+
+"配色方案
+colo desert
+
+"set gui options
+if has("gui_running")
+  set guifont=Consolas:h9
+endif
+
+set diffexpr=MyDiff()
+
+set rtp+=$VIM/vimfiles/bundle/Vundle.vim
+call vundle#begin('$VIM/vimfiles/bundle/')
+else
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-" " }
+endif
+
 Bundle 'gmarik/vundle'
 "
 "   vundle 本身的安装：
@@ -50,15 +80,19 @@ Bundle 'junegunn/vim-easy-align'
 Bundle 'molokai'
 Bundle 'mileszs/ack.vim'
 
-
-
 let mapleader = ";"    " 比较习惯用;作为命令前缀，右手小拇指直接能按到
 " 把空格键映射成:
 nmap <space> :
 
 " 快捷打开编辑vimrc文件的键盘绑定
+if has("win32")
+map <silent> <leader>ee :e $VIM/_vimrc<cr>
+autocmd! bufwritepost *_vimrc source $VIM/_vimrc
+else
+
 map <silent> <leader>ee :e $HOME/.vimrc<cr>
 autocmd! bufwritepost *.vimrc source $HOME/.vimrc
+endif
 
 " Use the Solarized Dark theme
 set background=dark
@@ -95,6 +129,15 @@ if exists("&undodir")
     set undodir=~/.vim/undo
 endif
 
+if has("win32")
+" ^z快速进入shell
+"inoremap <leader>n <esc>
+
+set tags=tags
+set autochdir
+set smartcase
+else
+
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
 
@@ -113,6 +156,8 @@ set title
 set showcmd
 " Start scrolling three lines before the horizontal window border
 set scrolloff=5
+
+endif
 
 set nocompatible    " 关闭兼容模式
 syntax enable       " 语法高亮
@@ -161,7 +206,7 @@ set autoread     " 当文件在外部被修改时，自动重新读取
 set mouse=     " 在所有模式下都允许使用鼠标，还可以是n,v,i,c等
 
 set encoding=utf8
-set fileencodings=utf8,gb2312,gb18030,ucs-bom,latin1
+set fileencodings=utf8,gb2312,ucs-bom,gbk,big5
 
 " 状态栏
 set laststatus=2
@@ -330,63 +375,57 @@ function! DeleteFile(dir, filename)
 endfunction
 
 
-" 显示中文帮助
-if version >= 603
-	set helplang=cn
-	set encoding=utf-8
-endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"新建.c,.h,.sh,.java文件，自动插入文件头
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.py exec ":call Set_Title()"
-""定义函数SetTitle，自动插入文件头
-function! Set_Title()
-	"如果文件类型为.sh文件
-	if &filetype == 'sh'
-		call setline(1,"\#########################################################################")
-		call append(line("."), "\# File Name: ".expand("%"))
-		call append(line(".")+1, "\# Author: zgt")
-		call append(line(".")+2, "\# mail: zhaoguitian@galaxywind.com")
-		call append(line(".")+3, "\# Created Time: ".strftime("%c"))
-		call append(line(".")+4, "\#########################################################################")
-		call append(line(".")+5, "\#!/bin/bash")
-		call append(line(".")+6, "")
-	elseif &filetype == 'python'
-		call setline(1,"#!/usr/bin/python2.7")
+"新建.c,.h,.sh,.java文件，自动插入文件头 
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.py exec ":call Set_Title()" 
+""定义函数SetTitle，自动插入文件头 
+function! Set_Title() 
+    "如果文件类型为.sh文件 
+    if &filetype == 'sh' 
+        call setline(1,"\#########################################################################") 
+        call append(line("."), "\# File Name: ".expand("%")) 
+        call append(line(".")+1, "\# Author: zgt") 
+        call append(line(".")+2, "\# mail: zhaoguitian@galaxywind.com") 
+        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
+        call append(line(".")+4, "\#########################################################################") 
+        call append(line(".")+5, "\#!/bin/bash") 
+        call append(line(".")+6, "") 
+    elseif &filetype == 'python'
+        call setline(1,"#!/usr/bin/python2.7")
         call setline(2,"#coding:utf-8")
         call setline(3,"\"\"\"")
-		call setline(4, "	 File Name: ".expand("%"))
-		call setline(5, "	 Author: zgt")
-		call setline(6, "	 Mail: zhaoguitian@galaxywind.com ")
-		call setline(7, "	 Created Time: ".strftime("%c"))
-		call setline(8, "     note: ")
-		call setline(9, "\"\"\"")
-		call setline(10, "import os,sys,io")
-		call setline(11, "")
-	else
-		call setline(1, "/*************************************************************************")
-		call append(line("."), "	> File Name: ".expand("%"))
-		call append(line(".")+1, "	> Author: zgt")
-		call append(line(".")+2, "	> Mail: zhaoguitian@galaxywind.com ")
-		call append(line(".")+3, "	> Created Time: ".strftime("%c"))
-		call append(line(".")+4, " ************************************************************************/")
-		call append(line(".")+5, "")
-	endif
-	if &filetype == 'cpp'
-		call append(line(".")+6, "#include<iostream>")
-		call append(line(".")+7, "using namespace std;")
-		call append(line(".")+8, "")
-	endif
-	if &filetype == 'c'
-		call append(line(".")+6, "#include<stdio.h>")
-		call append(line(".")+7, "#include<stdlib.h>")
-		call append(line(".")+8, "")
-	endif
-	"新建文件后，自动定位到文件末尾
-	autocmd BufNewFile * normal G
-endfunc
+        call setline(4, "    File Name: ".expand("%")) 
+        call setline(5, "    Author: zgt") 
+        call setline(6, "    Mail: zhaoguitian@galaxywind.com ") 
+        call setline(7, "    Created Time: ".strftime("%c")) 
+        call setline(8, "     note: ") 
+        call setline(9, "\"\"\"") 
+        call setline(10, "import os,sys,io")
+        call setline(11, "")
+    else    
+        call setline(1, "/*************************************************************************") 
+        call append(line("."), "    > File Name: ".expand("%")) 
+        call append(line(".")+1, "  > Author: zgt") 
+        call append(line(".")+2, "  > Mail: zhaoguitian@galaxywind.com ") 
+        call append(line(".")+3, "  > Created Time: ".strftime("%c")) 
+        call append(line(".")+4, " ************************************************************************/") 
+        call append(line(".")+5, "")
+    endif
+    if &filetype == 'cpp'
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    endif
+    if &filetype == 'c'
+        call append(line(".")+6, "#include<stdio.h>")
+        call append(line(".")+7, "#include<stdlib.h>")
+        call append(line(".")+8, "")
+    endif
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
+endfunc 
 
 
 " 映射全选+复制 ctrl+a
@@ -420,7 +459,8 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-
+autocmd FileType java,php setl shiftwidth=4
+autocmd FileType java,php setl tabstop=4 
 
 "pydiction 1.2 python auto complete
 filetype plugin on
@@ -550,6 +590,7 @@ map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove<cr>
 map <leader>tt  :tabnext<cr>
 
+if !has("win32")
 "调用ag功能查找目录下的文件中的当前光标所在的单词
 let ___ack_ver = system("ack --version|cut -d' ' -f 2")
 let ___ack_ver1= split(___ack_ver)[0]
@@ -561,6 +602,6 @@ nnoremap <leader>sw :Ack <cword><cr>
 "加载压缩文件时，自动解压
 autocmd BufReadPost,FileReadPost   *.gz '[,']!gunzip
 autocmd BufReadPost,FileReadPost   *.bz2 '[,']!bunzip2
-
+endif
 
 

@@ -63,7 +63,6 @@ export LCLIMPORTDIR=usr/local/share/splint/import
 
 alias mdu='memdump --servers 127.0.0.1:11211'
 alias mrm='memdump --servers 127.0.0.1:11211|xargs -i{} memrm --servers 127.0.0.1:11211 {}'
-alias mcat='memdump --servers 127.0.0.1:11211|xargs -i{} memcat --servers 127.0.0.1:11211 {}'
+alias mshow='memcat --servers 127.0.0.1:11211 '
 
 
-cd /home/atz

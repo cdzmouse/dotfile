@@ -28,6 +28,7 @@ modules.builtin
 Module.symvers
 *.dwo
 *.su
+GIT_HEAD_VER
 
 #
 # Top-level generic files

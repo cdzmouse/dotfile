@@ -62,7 +62,14 @@ export LCLIMPORTDIR=usr/local/share/splint/import
 #settcelf   > /dev/null
 
 alias mdu='memdump --servers 127.0.0.1:11211'
-alias mrm='memdump --servers 127.0.0.1:11211|xargs -i{} memrm --servers 127.0.0.1:11211 {}'
+alias mrm='memrm --servers 127.0.0.1:11211 '
+alias mall='memdump --servers 127.0.0.1:11211|tee /tmp/__s|xargs -i{} memcat --servers 127.0.0.1:11211 {};cat /tmp/__s'
+alias mcat='memdump --servers 127.0.0.1:11211|tee /tmp/__s|xargs -i{} memcat --servers 127.0.0.1:11211 {}'
 alias mshow='memcat --servers 127.0.0.1:11211 '
 alias nginx_restart='killall -9 nginx;service nginx restart'
 
+
+
+
+alias gmstatus="gearadmin --status"
+alias restart_cache="service memcached restart;service redis restart"

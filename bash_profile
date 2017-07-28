@@ -2,7 +2,12 @@
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
+
+bind  '"\C-b":backward-word'
+bind  '"\C-f":forward-word'
+
 export LC_CTYPE="zh_CN.UTF-8"
+#export CDPATH=/home/atz/:/home/atz/fans_router/
 
 alias ftp=lftp
 alias vi=vim
@@ -69,7 +74,16 @@ alias mshow='memcat --servers 127.0.0.1:11211 '
 alias nginx_restart='killall -9 nginx;service nginx restart'
 
 
+export LARCH_PATH=/usr/local/splint/share/splint/lib
+export LCLIMPORTDIR=/usr/local/splint/share/splint/import
+export PATH=/usr/local/splint/bin:$PATH 
 
+cd /home/atz/fans_router/
 
 alias gmstatus="gearadmin --status"
 alias restart_cache="service memcached restart;service redis restart"
+
+alias valgrind="valgrind -v --tool=memcheck   --leak-check=full    --undef-value-errors=yes   --smc-check=all "
+
+alias showlog='redis-cli -p 6379 llen  ilog_default_q'
+

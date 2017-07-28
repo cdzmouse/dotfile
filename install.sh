@@ -26,3 +26,7 @@ ln -fs `pwd`/tm   /bin/tm
 
 
 
+chmod +x fmttrans.py 
+ln -s `pwd`/fmttrans.py /bin/fmttrans
+
+

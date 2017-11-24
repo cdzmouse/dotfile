@@ -76,7 +76,7 @@ alias nginx_restart='killall -9 nginx;service nginx restart'
 
 export LARCH_PATH=/usr/local/splint/share/splint/lib
 export LCLIMPORTDIR=/usr/local/splint/share/splint/import
-export PATH=/usr/local/splint/bin:$PATH 
+export PATH=/usr/local/splint/bin:$PATH:/usr/local/lib/tsung/bin/
 
 cd /home/atz/fans_router/
 

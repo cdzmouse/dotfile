@@ -128,3 +128,7 @@ jco() {
         jo $(pwd) ${@}
     fi
 }
+
+js() {
+    autojump -s
+}

@@ -87,3 +87,6 @@ alias valgrind="valgrind -v --tool=memcheck   --leak-check=full    --undef-value
 
 alias showlog='redis-cli -p 6379 llen  ilog_default_q'
 
+
+[[ -s /root/.autojump/etc/profile.d/autojump.sh ]] && source /root/.autojump/etc/profile.d/autojump.sh
+

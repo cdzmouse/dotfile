@@ -71,7 +71,7 @@ alias mrm='memrm --servers 127.0.0.1:11211 '
 alias mall='memdump --servers 127.0.0.1:11211|tee /tmp/__s|xargs -i{} memcat --servers 127.0.0.1:11211 {};cat /tmp/__s'
 alias mcat='memdump --servers 127.0.0.1:11211|tee /tmp/__s|xargs -i{} memcat --servers 127.0.0.1:11211 {}'
 alias mshow='memcat --servers 127.0.0.1:11211 '
-alias nginx_restart='killall -9 nginx;service nginx restart'
+alias nginx_reload='nginx -s reload'
 
 
 export LARCH_PATH=/usr/local/splint/share/splint/lib

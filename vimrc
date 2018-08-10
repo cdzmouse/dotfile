@@ -590,18 +590,6 @@ map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove<cr>
 map <leader>tt  :tabnext<cr>
 
-if !has("win32")
-"调用ag功能查找目录下的文件中的当前光标所在的单词
-let ___ack_ver = system("ack --version|cut -d' ' -f 2")
-let ___ack_ver1= split(___ack_ver)[0]
-if ___ack_ver1 < 2
-    let g:ack_default_options = "  -H --nocolor --nogroup --column"
-endif
-nnoremap <leader>sw :Ack <cword><cr>
 
-"加载压缩文件时，自动解压
-autocmd BufReadPost,FileReadPost   *.gz '[,']!gunzip
-autocmd BufReadPost,FileReadPost   *.bz2 '[,']!bunzip2
-endif
 
 

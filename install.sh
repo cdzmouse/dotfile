@@ -9,6 +9,8 @@ tar xvf vim_plugin.tgz
 yum install -y gdb cgdb
 rpm -i http://dl.fedoraproject.org/pub/epel/6/x86_64/cgdb-0.6.7-1.el6.x86_64.rpm
 
+rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/Packages/c/cgdb-0.6.7-1.el6.x86_64.rpm
+
 
 ##安装vim配置
 ln -fs `pwd`/vim    ~/.vim

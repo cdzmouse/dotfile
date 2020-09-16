@@ -31,5 +31,3 @@
 	prompt = false
 [web]
 	browser = open
-[push]
-	default = simple

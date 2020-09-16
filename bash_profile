@@ -73,6 +73,9 @@ alias mcat='memdump --servers 127.0.0.1:11211|tee /tmp/__s|xargs -i{} memcat --s
 alias mshow='memcat --servers 127.0.0.1:11211 '
 alias nginx_reload='nginx -s reload'
 
+alias rdu='redis-cli -h 127.0.0.1 -p 6379 --scan '
+alias rrm='redis-cli -h 127.0.0.1 -p 6379 del '
+alias rshow='redis-cli -h 127.0.0.1 -p 6379 get '
 
 export LARCH_PATH=/usr/local/splint/share/splint/lib
 export LCLIMPORTDIR=/usr/local/splint/share/splint/import

@@ -23,9 +23,10 @@
 	br = branch
 	mt = mergetool
 	d = difftool
+    df = diff --color  
 	dst = diff --staged
 	sub = submodule
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --stat
 [mergetool]
 	prompt = false
 [web]

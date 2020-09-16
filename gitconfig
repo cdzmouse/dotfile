@@ -31,3 +31,5 @@
 	prompt = false
 [web]
 	browser = open
+[push]
+    default = matching
